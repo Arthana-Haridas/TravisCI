@@ -20,14 +20,12 @@
          - kv_api_ver: kv2
          - namespace:
            - name: ns1
-           - admin/ns1/
+           - admin/ns1/new_kv
            - name: compiler
-           - admin/python/
+           - admin/ns1/lang/py
  env:
-   - $ns1
- before_script:
-   - NS1= $compiler
+   - NS1=$ns1
  script:
    - $compiler
    - python hello_world.py
-   - echo NS1   
+   - NS1   

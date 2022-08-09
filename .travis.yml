@@ -1,11 +1,33 @@
-jobs:
-  include:
-    - os: linux
-      language: python
-      python:
-       - "3.8"
-      arch: amd64
-      dist: focal
-      script:
-        - python hello_world.py
-    
+#jobs:
+ # include:
+  #  - os: linux
+   #   language: python
+    #  python:
+     #  - "3.8"
+      #arch: amd64
+      #dist: focal
+      #script:
+       # - python hello_world.py
+ os: linux
+ dist: focal
+ language: python
+ jobs.include:
+   - vault:
+       api_url: $VAULT_ADDR
+       token:
+         secure: $VAULT_TOKEN
+       secrets:
+         - kv_api_ver: kv2
+         - namespace:
+           - name: ns1
+           - admin/ns1/
+           - name: compiler
+           - admin/python/
+ env:
+   - $ns1
+ before_script:
+   - NS1= $compiler
+ script:
+   - $compiler
+   - python hello_world.py
+   - echo NS1   

@@ -13,19 +13,21 @@
  language: python
  jobs.include:
    - vault:
-       api_url: $VAULT_ADDR
+       api_url: https://api-staging.travis-ci.com
        token:
-         secure: $VAULT_TOKEN
+         secure: "i88GmX83x3x9n68zjl6np0aRsLrf4CRY8j4f8jzhLwY0Tmrc4qa49W62a+zW0l46EPn2Ev9ojkGuw67vxvaxDEXFBmSGp43Zsl9UOKx/ShB9YhZlWgUpDHM/4FPCdw8ZmFm/vvdmwqLfjQFjIghkiFJKMd81Zdhnv30kL3tmNLkpGgxVDaUyXCaLDSENaieYlQt/Bkpa35JMQWj6LylbW+m4WAfBGOXJyF3YZl1j+eMkogjSErXidnIwW2aoXv6BwnvZieGneM2VvmPy75xYqbRlZ0Ar+obbhkxK2E4xtsWX5fjBC0Cj7Isg6U151YVhThipDC3OYQMMpVTZe5tKSezNhDTF6hwNNUurqE5JHYQ4+OsQSoURRsEyGJjL76LdTmESJN4zj0s8K6AD7AZCWhKCqQSBuX3aMsyZDZAIj2HrE7T1FQjaIhhEmFx/q5LGINu+yUfi4m+FJIWfpC2trwYsLWYZz2aKHa4p23M2HtIXwA97msujGjwee1eCc8oguju5WPTlTuoemRwLfdo4YJdXL8vlvAo+7CtkwY6LURAgjAZY1hKP2GLJYubTjVOk+95Y34FLy+Nnra/F5A1XX9oNH+NwrEUw+PaxNnTWKRHAV+F4XPqtO9Hj/jbnrrrfgL01A/e+iBaxG457dIQc3v4kX0w/daSkTfuDgYJ4K3A="
        secrets:
          - kv_api_ver: kv2
          - namespace:
            - name: ns1
-           - admin/ns1/new_kv
+           - admin/ns1/
            - name: compiler
-           - admin/ns1/lang/py
+           - admin/python/
  env:
-   - NS1=$ns1
+   - $ns1
+ before_script:
+   - NS1= $compiler
  script:
    - $compiler
    - python hello_world.py
-   - NS1   
+   - echo NS1  
